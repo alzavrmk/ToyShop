@@ -14,7 +14,7 @@ public class Main {
 //        System.out.println (pa.getMother());
 //        System.out.println (sister1.getMother());
 //        System.out.println (sister1.getFather());
-        TreeFamily tree = new TreeFamily();
+        TreeFamily<Human> tree = new TreeFamily();
 
         tree.add(pa);
         tree.add(ma);

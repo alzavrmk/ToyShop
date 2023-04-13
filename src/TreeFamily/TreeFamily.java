@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TreeFamily implements Iterable<Human>, Serializable{
-    public List<Human> list;
+public class TreeFamily<E> implements Iterable<Human>, Serializable{
+    public List<E> list;
 
     public TreeFamily() {
         list = new ArrayList<>();
     }
 
-    public boolean add(Human human){
+    public boolean add(E human){
         if (human== null) {
             return false;
         }
@@ -48,8 +48,8 @@ public class TreeFamily implements Iterable<Human>, Serializable{
 //        list.add(human);
 //    }
 
-    public Human getByMather(Human human) {
-        for (Human hum : list) {
+    public E getByMather(E human) {
+        for (E hum : list) {
             if (hum.getMother().equals(human.getMother())) {
                 return hum;
             }
@@ -58,7 +58,7 @@ public class TreeFamily implements Iterable<Human>, Serializable{
     }
 
     public Human getByHuman(Human human){
-        for (Human hum: list){
+        for (E hum: list){
             if (human.equals(hum)){
                 return human;
             }
@@ -76,7 +76,7 @@ public class TreeFamily implements Iterable<Human>, Serializable{
         }
     }
 
-    public List<Human> getList() {
+    public List<E> getList() {
         return list;
     }
 
@@ -85,7 +85,7 @@ public class TreeFamily implements Iterable<Human>, Serializable{
         sb.append("В дереве объектов - ");
         sb.append(list.size());
         sb.append(":\n");
-        for (Human hum:list){
+        for (E hum:list){
             sb.append(hum.getInfo());
         }
         return sb.toString();
@@ -101,8 +101,8 @@ public class TreeFamily implements Iterable<Human>, Serializable{
 
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(list);
+    public Iterator<E> iterator() {
+        return new HumanIterator<E>(list);
     }
 
 
