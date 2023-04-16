@@ -5,6 +5,7 @@ import model.TreeFamily.TreeFamily;
 import model.human.Human;
 import presenter.Presenter;
 import ui.Console;
+import ui.Desctop;
 import ui.View;
 
 import java.io.*;
@@ -66,7 +67,7 @@ public class Main {
 //            System.out.println(human);
 //        }
 
-        View view = new Console();
+        View view = new Desctop();
         Service service = new Service(tree);
         new Presenter(view, service);
         view.start();

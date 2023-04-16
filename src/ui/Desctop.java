@@ -10,12 +10,26 @@ import java.awt.event.ActionListener;
 
 public class Desctop extends JFrame implements View {
 
-    private JLabel lCity;
-    private JTextArea answer;
-    private JTextField name;
-    private JTextField family;
-    private JButton findInfo;
+    private JLabel lTitle;//Текстовые надписи
+    private JLabel lTitleAddHuman;
+    private JLabel lTitleAddFamily;
+    private JLabel lTitleAddName;
+    private JLabel lTitleBirth;
+    private JLabel lTitleDateBirth;
+    private JLabel lTitleMonthBirth;
+    private JLabel lTitleYearBirth;
+
+
+    private JTextArea inputFamily;//Поле ввода текста
+    private JTextArea inputName;
+    private JTextArea inputDateBirth;
+    private JTextArea inputMonthBirth;
+    private JTextArea inputYearBirth;
+    private JTextField city;
+    private JButton showTree;
+    private JButton buttonAddHuman;
     private Presenter presenter;
+
 
     @Override
     public void setPresenter(Presenter presenter) {
@@ -24,25 +38,45 @@ public class Desctop extends JFrame implements View {
 
     @Override
     public void start() {
-        setSize(400, 400);
+        setSize(800, 800);
+
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        lCity = new JLabel("Город: ");
-        answer = new JTextArea();
-        findInfo = new JButton("Узнать погоду");
-        name = new JTextField();
-        family = new JTextField();
+
+        lTitle = new JLabel("Родословное древо семьи Базаровых");
+        showTree = new JButton("Показать родословное древо");
+        lTitleAddHuman = new JLabel("Введите данные, чтобы добавить человека");
+        lTitleAddFamily = new JLabel("Фамилия");
+        inputFamily = new JTextArea();
+        lTitleAddName = new JLabel("Имя");
+        inputName = new JTextArea();
+        lTitleBirth = new JLabel("Дата рождения");
+        lTitleDateBirth = new JLabel("Число");
+        // inputBirthdate = new JTextArea();
+        buttonAddHuman = new JButton("Добавить");
+
+
+        city = new JTextField();
         setLayout(null);
-        add(lCity);
-        add(name);
-        add(family);
-        add(findInfo);
-        add(answer);
-        lCity.setBounds(20, 40, 50, 25);
-        name.setBounds(70, 45, 100, 20);
-        name.setBounds(180, 45, 100, 20);
-        findInfo.setBounds(95, 80, 200, 50);
-        answer.setBounds(20, 140, 340, 160);
+        add(lTitle);
+        add(city);
+        add(showTree);
+        add(inputFamily);
+        add(lTitleAddHuman);
+        add(lTitleAddFamily);
+        add(inputName);
+        add(lTitleAddName);
+        // add(lTitleAddBirthdate);
+        //add(inputBirthdate);
+        lTitle.setBounds(40, 10, 400, 25);
+        showTree.setBounds(20, 45, 300, 40);
+        lTitleAddHuman.setBounds(20, 95, 350,25);
+        lTitleAddFamily.setBounds(20,130,150, 25);
+        inputFamily.setBounds(150,130,200,25);
+        lTitleAddName.setBounds(20, 170, 150, 25);
+        inputName.setBounds(150, 170, 200,25);
+//        lTitleAddBirthdate.setBounds(20, 210, 150, 25);
+//        inputBirthdate.setBounds(150, 210,150,25);
 
         findInfo.addActionListener(new ActionListener() {//При нажатии на кнопку происходит оповещение слушателей
             //ActionListener()-интерфейс
