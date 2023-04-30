@@ -140,7 +140,7 @@ public class Human implements Serializable, Comparable<Human>  {
         sb.append(", ");
         sb.append(this.getGenderInfo());
         return sb.toString();
-                //String.format("\n\nФамилия: %s;\nИмя: %s;\nПол: %s;\nДата рождения: %s;", family, name, gender,birthdate);
+        //String.format("\n\nФамилия: %s;\nИмя: %s;\nПол: %s;\nДата рождения: %s;", family, name, gender,birthdate);
     }
     @Override
     public String toString() {
@@ -170,7 +170,4 @@ public class Human implements Serializable, Comparable<Human>  {
         return getFamily().compareTo(human.getFamily()) ;
     }
 
-    public enum Gender {
-        Mail, Fimale
-    }
 }

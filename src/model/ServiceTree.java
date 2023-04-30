@@ -7,7 +7,7 @@ import model.human.HumanComporatorByName;
 import java.io.*;
 import java.util.Collections;
 
-public class ServiceTree implements Serviceble {
+public class ServiceTree implements Service {
     private TreeFamily<Human> tree;
 
 // Конструктор для создания объекта класса ServiceTree для дерева

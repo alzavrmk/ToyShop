@@ -30,7 +30,6 @@ public class Presenter {
     public void addHuman(String family, String name) {
 
         service.addHuman(family, name);
-       // view.print();
     }
     public void clearTree(){
         service.clearTree();

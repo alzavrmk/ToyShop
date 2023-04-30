@@ -10,16 +10,12 @@ public class Console implements View {
     private Presenter presenter;//куда отправлять информацию
     private Scanner scannerName;// для работы с пользователем
     private Scanner scanner;
-//    private Scanner scannerMenu;
-//    private Scanner scannerFamily;
     private boolean work;
     private Menu menu;
 
 
     public Console() {
         scanner = new Scanner(System.in);
-//        scannerName = new Scanner(System.in);
-//        scannerFamily = new Scanner(System.in);
         work = true;
         menu = new Menu(this);
     }
@@ -39,12 +35,6 @@ public class Console implements View {
              int choice = Integer.parseInt(scan());
              menu.execute(choice);
         }
-//        scannerMenu.close();
-//        scannerName.close();
-//        scannerFamily.close();
-
-
-
     }
 
     private  boolean check(String text){
@@ -53,14 +43,11 @@ public class Console implements View {
 
     private String scan() {
         return scanner.nextLine();
-
-
-
     }
 
     private String scanName() {
         System.out.println("Введите имя: ");
-        return scanner.nextLine();
+        return scan();//scanner.nextLine();
     }
 
     private String scanFamily() {
@@ -70,11 +57,13 @@ public class Console implements View {
 
     @Override
     public void printHuman(Human human) {
+
         System.out.println(human);
     }
 
     @Override
     public void printTree() {
+
         System.out.println(presenter.getTree().getInfo());
     }
 
@@ -95,8 +84,4 @@ public class Console implements View {
         System.out.println(presenter.getTree());
 
     }
-
-//    public void searchHuman() {
-//        System.out.println(presenter.searchHuman());
-//    }
 }

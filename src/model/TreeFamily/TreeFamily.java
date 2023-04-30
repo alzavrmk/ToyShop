@@ -34,8 +34,6 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
             }
 
         }
-
-
     }
 
 
@@ -146,16 +144,12 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
 
     @Override
     public String toString() {
-//        return "model.TreeFamily.model.TreeFamily{" +
-//                "list=" + list +
-//                '}';
         return this.getInfo();
     }
 
     @Override
     public Iterator<E> iterator() {
-
-        return new HumanIterator<E>(list);
+        return list.iterator();
     }
     public void clearTree(){
         list.clear();

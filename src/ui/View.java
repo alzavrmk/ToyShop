@@ -8,5 +8,4 @@ public interface View {
     void setPresenter(Presenter presenter);
     void printHuman(Human human);//
     void printTree();
- //   void printHuman();
 }
