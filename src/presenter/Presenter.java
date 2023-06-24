@@ -1,26 +1,25 @@
 package presenter;
 
-import model.Datatable;
-import model.TreeFamily.ServiceData;
-import model.TreeFamily.ServiceTree;
-import model.TreeFamily.TreeFamily;
+import model.listToy.ListToy;
+import model.listToy.ServiceData;
+import model.listToy.ServiceListToy;
 import ui.View;
 
 import java.io.IOException;
 
 public class Presenter {
-    //создаем методы под каждое действие - добавить человека, добавить родственные связи
+    //создаем методы под каждое действие
     private View view;
-    private ServiceTree service;
+    private ServiceListToy service;
     private ServiceData data;
 
-    public Presenter(View view, ServiceTree service) {
+    public Presenter(View view, ServiceListToy service) {
         this.view = view;
         this.service = service;
         view.setPresenter(this);
         //сообщаем view  с каким презентером она будет работать
     }
-    public Presenter(View view, ServiceTree service, ServiceData data) {
+    public Presenter(View view, ServiceListToy service, ServiceData data) {
         this.view = view;
         this.service = service;
         this.data = data;
@@ -28,45 +27,27 @@ public class Presenter {
         //сообщаем view  с каким презентером она будет работать
     }
 
-    public void addHuman(String family, String name) {
-        service.addHuman(family, name);
-    }
-    public void addMother(int id, String family, String name) {
-        service.addMother(id, family, name);
-
-    }
-    public void addFather(int id, String family, String name) {
-        service.addFather(id, family, name);
-
-    }
-    public void addChild(int id, String family, String name) {
-        service.addChild(id, family, name);
-
-    }
-    public String deleteHuman(int id){
-
-        return service.deleteHuman(id);
-    }
-    public void clearTree(){
-
-        service.clearTree();
+    public void addToy(String nameToy, int countToy, int toyDropRate) {
+        service.addToy(nameToy, countToy, toyDropRate);
     }
 
-    public TreeFamily getTree(){
-        return service.getTree();
+    public String deleteToy(int id){
+
+        return service.deleteToy(id);
+    }
+    public void clearListToy(){
+
+        service.clearListToy();
     }
 
-    public String searchHuman(String family, String name) {
-        return service.searchHuman(family, name);
+    public ListToy getListToy(){
+
+        return service.getListToy();
     }
 
-    public String searchParents(String family, String name) {
+    public String searchToy(String nameToy) {
 
-        return service.searchParents(family, name);
-    }
-    public String searchChild(String family, String name) {
-
-        return service.searchChild(family, name);
+        return service.searchToy(nameToy);
     }
 
 
@@ -78,7 +59,7 @@ public class Presenter {
     public String printFile(){
         try {
             if (service.read(data) != null) {
-                TreeFamily read = (TreeFamily) service.read(data);
+                ListToy read = (ListToy) service.read(data);
                 return read.toString();
             }
             return "Файл пуст";
