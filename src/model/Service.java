@@ -1,20 +1,14 @@
 package model;
 
-import java.io.IOException;
+import model.listToy.ListToy;
+import model.toy.Toy;
 
 public interface Service {
-    void addHuman(String family, String name);
-    void addMother(int id, String family, String name);
-    void addFather(int id, String family, String name);
-    void addChild(int id, String family, String name);
-   // public getByHuman ();
-    void sortByName();
-    void sortByFamily();
-     public String searchHuman(String family, String name);
-    public String searchParents(String family, String name);
-    public String searchChild(String family, String name);
-    public void clearTree();
-    public String deleteHuman(int id);
+    ListToy<Toy> getListToy();
 
-
+    void addToy(String nameToy, int countToy, int toyDropRate);
+//    void sortByName();
+    public String searchToy(String nameToy);
+    public void clearListToy();
+    public String deleteToy(int idToy);
 }

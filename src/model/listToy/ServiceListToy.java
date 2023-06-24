@@ -3,97 +3,62 @@ package model.listToy;
 import model.Datatable;
 import model.Service;
 import model.toy.Toy;
-import model.toy.ToyComporatorByName;
 
 import java.io.*;
-import java.util.Collections;
 
-public class ServiceTree implements Service{
-    private TreeFamily<Toy> tree;
+public class ServiceListToy implements Service{
+    private ListToy<Toy> listToy;
     private Datatable datatable;
 
     public void setDatatable(Datatable datatable) {
         this.datatable = datatable;
     }
 
-    public ServiceTree(TreeFamily<Toy> tree) {
+    public ServiceListToy(ListToy<Toy> listToy) {
 
-        this.tree = tree;
-    }
-
-    public TreeFamily<Toy> getTree() {
-        return tree;
+        this.listToy = listToy;
     }
     @Override
-    public void addHuman(String family, String name){
-        tree.addHuman(family, name);
-
-    }
-    @Override
-    public void addMother(int id, String family, String name){
-        tree.addMother(id, family, name);
+    public void addToy(String nameToy, int countToy, int toyDropRate){
+        listToy.addToy(nameToy, countToy, toyDropRate);
 
     }
 
+//    @Override
+//    public void sortByName(){
+//        listToy.getList().sort(new ToyComporatorByName());
+//
+//    }
     @Override
-    public void addFather(int id, String family, String name){
-        tree.addFather(id, family, name);
+    public String searchToy(String nameToy) {
 
-    }
-    @Override
-    public void addChild(int id, String family, String name){
-        tree.addChild(id, family, name);
+        return listToy.searchToy(nameToy);
 
     }
 
     @Override
-    public void sortByFamily(){
-        //tree.getList().sort();
-        Collections.sort(tree.getList());
-    }
-    @Override
-    public void sortByName(){
-        tree.getList().sort(new ToyComporatorByName());
+    public void clearListToy(){
 
-    }
-    @Override
-    public String searchHuman(String family, String name) {
-
-        return tree.getByHuman(family,name);
-
-    }
-
-    public String searchMather(String family, String name) {
-
-        return tree.getByMather(family,name);
-
-    }
-    @Override
-    public String searchParents(String family, String name){
-        return tree.searchParents(family,name);
-
-    }
-    @Override
-    public String searchChild(String family, String name){
-        return tree.searchChild(family,name);
-
-    }
-    @Override
-    public void clearTree(){
-
-        tree.clearTree();
+        listToy.clearListToy();
     }
 
     @Override
-    public String deleteHuman(int id){
-        if (tree.deleteHuman(id)){
-            return "Человек удален";
+    public String deleteToy(int id){
+        if (listToy.deleteToy(id)){
+            return "Игрушка удалена";
         }
-        return "Человека с таким id нет в дереве";
+        return "Игрушки с таким id нет в списке";
     }
+
+    @Override
+    public ListToy<Toy> getListToy() {
+        return listToy;
+    }
+
+
     public String save(Datatable datatable){
-        if (datatable.save(tree)){
-            return "Дерево сохранено в файл";
+        if (datatable.save(listToy)){
+            return "Список игрушек сохранен в файл";
         }
         else {
             return "Ошибка сохранения";
@@ -103,7 +68,7 @@ public class ServiceTree implements Service{
     }
 
     public Object read (Datatable datatable) throws IOException {
-        tree = (TreeFamily<Toy>) datatable.read();
+        listToy = (ListToy<Toy>) datatable.read();
         return datatable.read();
     }
 

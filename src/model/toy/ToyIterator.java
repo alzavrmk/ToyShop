@@ -3,11 +3,11 @@ package model.toy;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator<E> implements Iterator<E> {
+public class ToyIterator<E> implements Iterator<E> {
     private int index;
     private List<E> list;
 
-    public HumanIterator(List<E> list) {
+    public ToyIterator(List<E> list) {
         this.list = list;
     }
 

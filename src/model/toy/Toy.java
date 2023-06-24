@@ -1,162 +1,58 @@
 package model.toy;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-public class Human implements Serializable, Comparable<Human>  {
+public class Toy implements Serializable, Comparable<Toy>  {
     private int id;
-    private Human mother;
-    private Human father;
-    private String family;
-    private String name;
-    private Gender gender;
-    private LocalDate birthdate;
-    private Set<Human> сhildrenList;
+    private String nameToy;
+    private int countToy;
+    private int toyDropRate;
 
 
-    public Human(int id, Human father, Human mother, String family, String name, Gender gender, LocalDate birthdate) {
+    public Toy(int id, String nameToy, int count, int toyDropRate) {
         this.id = id;
-        this.mother = mother;
-        this.father = father;
-        this.family = family;
-        this.name = name;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.сhildrenList = new HashSet<Human>();
-    
+        this.nameToy = nameToy;
+        this.countToy = count;
+        this.toyDropRate = toyDropRate;
     }
+    public Toy(String nameToy) {
+        this.id = 0;
+        this.nameToy = nameToy;
+        this.countToy = 0;
+        this.toyDropRate = 0;
+    }
+
     public int getId() {
         return id;
     }
 
-
-
-    public Human(int id,String family, String name, Gender gender, LocalDate birthdate) {
-        this (id, null,null , family, name, gender, birthdate);
-
-    }
-    public Human(int id, String family, String name) {
-        this (id,null,null , family, name, null, null);
-
-    }
-    public Human(String family, String name) {
-        this (0,null,null , family, name, null, null);
-
+    public String getNameToy() {
+        return nameToy;
     }
 
-    public Human getMother() {
-        return mother;
+    public int getCountToy() {
+        return countToy;
     }
 
-    public Human getFather() {
-        return father;
-    }
-    public Set<Human> getChild() {
-        return this.сhildrenList;
+    public int getToyDropRate() {
+        return toyDropRate;
     }
 
-
-    public String getMotherInfo() {
-
-        String res = "Мать: ";
-        if (mother!= null){
-            res += mother.getInfo();
-        }
-        else {
-            res += "неизвестна";
-        }
-        return res;
+    public void setNameToy(String nameToy) {
+        this.nameToy = nameToy;
     }
 
-    public String getFatherInfo() {
-        String res = "Отец: ";
-        if (father!= null){
-            res += father.getInfo();
-        }
-        else {
-            res += "неизвестен";
-        }
-        return res;
+    public void setCountToy(int countToy) {
 
+        this.countToy = countToy;
     }
 
-    public String getFamily() {
-        return family;
-    }
-
-    public void setFamily(String family) {
-        this.family = family;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public String getGenderInfo() {
-        String res = "Пол: ";
-        if (gender != null){
-            res += this.gender;
-        }
-        else {
-            res += "неизвестен";
-        }
-        return res;
-    }
-
-
-
-    public String getBirthdateInfo() {
-        String res = "Дата рождения: ";
-        if (birthdate != null){
-            res += this.birthdate.toString();
-        }
-        else {
-            res += "неизвестна";
-        }
-        return res;
-    }
-
-    public String getСhildrenList() {
-        String res = "Дети: \n";
-        if (this.сhildrenList.size() != 0){
-            res += this.сhildrenList.toString();
-        }
-        else res += "нет!";
-
-        return res;
-    }
-
-    public boolean setMother(Human mother) {
-        if (this.mother == null) {
-            this.mother = mother;
-            return true;
-        }
-        else {
-            return false;
+    public void setToyDropRate(int toyDropRate) {
+        if ((toyDropRate>0) && (toyDropRate<=100)) {
+            this.toyDropRate = toyDropRate;
         }
     }
-
-    public boolean setFather(Human father) {
-        if (this.father == null) {
-            this.father = father;
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    public void addChildrenList(Human human) {
-       this.сhildrenList.add(human);
-    }
-
 
     public String getInfo(){
 //        var formatter = DateTimeFormatter.ISO_LOCAL_DATE;
@@ -165,11 +61,9 @@ public class Human implements Serializable, Comparable<Human>  {
         sb.append("id: ");
         sb.append(id);
         sb.append(", ");
-        sb.append(family);
+        sb.append(nameToy);
         sb.append(" ");
-        sb.append(name);
-        sb.append(", ");
-        sb.append(this.getGenderInfo());
+        sb.append(toyDropRate);
         sb.append("\n");
 
         return sb.toString();
@@ -183,23 +77,23 @@ public class Human implements Serializable, Comparable<Human>  {
         if (this == object) {
             return true;
         }
-        if (!(object instanceof Human)) {
+        if (!(object instanceof Toy)) {
             return false;
         }
-         Human human = (Human) object;
-        return family.equals(human.family) && name.equals(human.name) ;
+         Toy toy = (Toy) object;
+        return nameToy.equals(toy.nameToy);
     }
 
 
 
     @Override
     public int hashCode() {
-        return Objects.hash(family, name, gender, birthdate);
+        return Objects.hash(nameToy);
     }
 
     @Override
-    public int compareTo(Human human) {
-        return getFamily().compareTo(human.getFamily()) ;
+    public int compareTo(Toy toy) {
+        return getNameToy().compareTo(toy.getNameToy()) ;
     }
 
     public enum Gender {
