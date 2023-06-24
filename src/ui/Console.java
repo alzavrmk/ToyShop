@@ -1,10 +1,13 @@
 package ui;
 
-import model.human.Human;
+import model.listToy.ListToy;
+import model.toy.Toy;
 import presenter.Presenter;
 
-import java.io.IOException;
 import java.util.Scanner;
+
+import static java.awt.SystemColor.control;
+import static java.awt.SystemColor.text;
 
 public class Console implements View {
 
@@ -17,8 +20,9 @@ public class Console implements View {
 
     public Console() {
         scanner = new Scanner(System.in);
-//        scannerId = new Scanner(System.in);
         work = true;
+
+
         menu = new Menu(this);
     }
 
@@ -26,10 +30,20 @@ public class Console implements View {
 
     @Override
     public void start() {
+//        while (work) {
+//            System.out.println(menu.print());
+//            int choice = Integer.parseInt(scan());
+//            menu.execute(choice);
+//        }
         while (work) {
             System.out.println(menu.print());
-            int choice = Integer.parseInt(scan());
-            menu.execute(choice);
+            String text = scan();
+            if (check(text)) {
+                int choice = Integer.parseInt(text);
+                menu.execute(choice);
+            } else {
+                System.out.println("Ошибка ввода! Введите число");
+            }
         }
     }
     @Override
@@ -45,65 +59,92 @@ public class Console implements View {
     private  boolean check(String text){
         return text.matches("[0-9]+");//Метод проверки что введено именно целое число из [0-9]
     }
-
+    private  boolean writeInt(String text){
+        return text.matches("\\d+");//Метод проверки что введено именно целое число
+    }
     private String scan() {
 
         return scanner.nextLine();
     }
-    private int scanId() {
-        System.out.println("Введите id: ");
-        return scanner.nextInt();
-    }
+    private int intId() {
+        int idToy = 0;
+        boolean flag = true;
 
-    private String scanName() {
-        System.out.println("Введите имя: ");
+        while (flag) {
+            String text = scanId();
+            if (writeInt(text)) {
+                idToy = Integer.parseInt(text);
+                flag = false;
+            } else {
+                System.out.println("Ошибка ввода! Введите число");
+            }
+        }
+        return idToy;
+    }
+    private int intCountToy() {
+        boolean flag = true;
+
+        int countToy = 0;
+        while (flag) {
+            String text = scanCountToy();
+            if (writeInt(text)) {
+                countToy = Integer.parseInt(text);
+                flag = false;
+            } else {
+                System.out.println("Ошибка ввода! Введите число");
+            }
+        }
+        return countToy;
+    }
+    private int intDropRateToy() {
+        boolean flag = true;
+        int dropRateToy = 0;
+        while (flag) {
+            String text = scanDropRateToy();
+            if (writeInt(text)) {
+                int dropRateToy1 = Integer.parseInt(text);
+                if ((dropRateToy1 <= 100) && (dropRateToy1 > 0)){
+                    dropRateToy = dropRateToy1;
+                    flag = false;
+                } else {
+                    System.out.println("Введите целое число в диапозоне от 0 до 100!");
+                }
+            } else {
+                System.out.println("Ошибка ввода! Введите число! ");
+            }
+        }
+        return dropRateToy;
+    }
+    private String scanId() {
+        System.out.println("Введите id игрушки: ");
         return scanner.nextLine();
     }
 
-    private String scanFamily() {
-        System.out.println("Введите фамилию: ");
+    private String scanNameToy() {
+        System.out.println("Введите название игрушки: ");
         return scanner.nextLine();
     }
 
+    private String scanCountToy() {
+        System.out.println("Введите количество игрушек: ");
+        return scanner.nextLine();
+    }
+    private String scanDropRateToy() {
+        System.out.println("Введите частоту выпадения игрушки: ");
+        return scanner.nextLine();
+    }
     @Override
-    public void printHuman(Human human) {
+    public void printToy(Toy toy) {
 
-        System.out.println(human);
+        System.out.println(toy);
     }
 
     @Override
-    public void addHuman(){
-
-        String name = scanName();
-        String family = scanFamily();
-        presenter.addHuman(family,name);
-    }
-    @Override
-    public void addMother(){
-            System.out.println("Введите id человека, которому хотите добавить мать");
-            int id = scanId();
-            scanner.nextLine();
-            String name = scanName();
-            String family = scanFamily();
-            presenter.addMother(id, family, name);
-    }
-    @Override
-    public void addFather(){
-        System.out.println("Введите id человека, которому хотите добавить отца.");
-        int id = scanId();
-        scanner.nextLine();
-        String name = scanName();
-        String family = scanFamily();
-        presenter.addFather(id, family, name);
-    }
-    @Override
-    public void addChild(){
-        System.out.println("Введите id человека, которому хотите добавить ребенка.");
-        int id = scanId();
-        scanner.nextLine();
-        String name = scanName();
-        String family = scanFamily();
-        presenter.addChild(id, family, name);
+    public void addToy(){
+        String nameToy = scanNameToy();
+        int countToy = intCountToy();
+        int dropRateToy = intDropRateToy();
+        presenter.addToy(nameToy, countToy, dropRateToy);
     }
 
 
@@ -112,51 +153,45 @@ public class Console implements View {
         work = false;
     }
     @Override
-    public void printTree() {
-        System.out.println(presenter.getTree().getInfo());
+    public void printListToy() {
+        System.out.println(presenter.getListToy().getInfo());
     }
 
 
-    public void searchHuman() {
-        String name = scanName();
-        String family = scanFamily();
-        System.out.println(presenter.searchHuman(family,name));
-    }
-
-    @Override
-    public void searchChild() {
-        String name = scanName();
-        String family = scanFamily();
-        System.out.println(presenter.searchChild(family,name));
-    }
-    @Override
-    public void searchParents() {
-        String name = scanName();
-        String family = scanFamily();
-        System.out.println(presenter.searchParents(family, name));
+    public void searchToy() {
+        String nameToy = scanNameToy();
+        System.out.println(presenter.searchToy(nameToy));
     }
 
     @Override
     public void save() {
+
         System.out.println(presenter.save());
     }
 
     @Override
     public void printFile() {
+
         System.out.println(presenter.printFile());
     }
     @Override
-    public void deleteHuman(){
-        System.out.println("Введите id человека, которого хотите удалить.");
-        int id = scanId();
-        scanner.nextLine();
-        System.out.println(presenter.deleteHuman(id));
+    public void deleteToy(){
+        int idToy = intId();
+//        scanner.nextLine();
+        System.out.println(presenter.deleteToy(idToy));
 
     }
     @Override
-    public void clearTree() {
-        presenter.clearTree();
-        System.out.println("Дерево очищено!");
+    public void clearListToy() {
+        presenter.clearListToy();
+        System.out.println("Список очищен!");
+    }
+//    @Override
+    public void getListToy() {
+        System.out.println("Список игрушек:");
+        System.out.println(presenter.getListToy().getInfo());
+
+
     }
 
 

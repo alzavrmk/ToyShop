@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Save extends Command {
     public Save(Console console) {
         super(console);
-        description = "Сохранить дерево в файл";
+        description = "Сохранить список игрушек в файл";
     }
 
     @Override

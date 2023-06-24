@@ -1,27 +1,27 @@
-package model.TreeFamily;
+package model.listToy;
 
 import model.Datatable;
 import model.Service;
-import model.human.Human;
-import model.human.HumanComporatorByName;
+import model.toy.Toy;
+import model.toy.ToyComporatorByName;
 
 import java.io.*;
 import java.util.Collections;
 
 public class ServiceTree implements Service{
-    private TreeFamily<Human> tree;
+    private TreeFamily<Toy> tree;
     private Datatable datatable;
 
     public void setDatatable(Datatable datatable) {
         this.datatable = datatable;
     }
 
-    public ServiceTree(TreeFamily<Human> tree) {
+    public ServiceTree(TreeFamily<Toy> tree) {
 
         this.tree = tree;
     }
 
-    public TreeFamily<Human> getTree() {
+    public TreeFamily<Toy> getTree() {
         return tree;
     }
     @Override
@@ -53,7 +53,7 @@ public class ServiceTree implements Service{
     }
     @Override
     public void sortByName(){
-        tree.getList().sort(new HumanComporatorByName());
+        tree.getList().sort(new ToyComporatorByName());
 
     }
     @Override
@@ -103,7 +103,7 @@ public class ServiceTree implements Service{
     }
 
     public Object read (Datatable datatable) throws IOException {
-        tree = (TreeFamily<Human>) datatable.read();
+        tree = (TreeFamily<Toy>) datatable.read();
         return datatable.read();
     }
 

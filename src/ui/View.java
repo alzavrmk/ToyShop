@@ -1,26 +1,19 @@
 package ui;
 
-import model.human.Human;
+import model.toy.Toy;
 import presenter.Presenter;
-
-import java.io.IOException;
 
 public interface View {
     void start();//метод открытие и создание графического окна или печать меню в консоли
     void setPresenter(Presenter presenter);
-    void printHuman(Human human);//
-    void printTree();
-    void addHuman();
-    void addMother();
-    void searchChild();
-    void searchParents();
+    void printToy(Toy human);//
+    void printListToy();
+    void addToy();
+    void searchToy();
     void save();
     void printFile();
-    void deleteHuman();
-    void clearTree();
+    void deleteToy();
+    void clearListToy();
 
-
-    void addFather();
-    void addChild();
 
 }

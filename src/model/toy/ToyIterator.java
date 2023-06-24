@@ -1,4 +1,4 @@
-package model.human;
+package model.toy;
 
 import java.util.Iterator;
 import java.util.List;

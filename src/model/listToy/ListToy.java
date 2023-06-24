@@ -1,14 +1,14 @@
 package model.TreeFamily;
 
-import model.human.Human;
-import model.human.HumanIterator;
+import model.toy.Toy;
+import model.toy.HumanIterator;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//extends Tree <E>
+public class TreeFamily<E extends Toy> implements Iterable<E>, Serializable{//extends Tree <E>
     public List<E> list;
     private int id;
 
@@ -29,7 +29,7 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
     //Метод добавления человека в дерево по имени и фамилии
     public void addHuman(String family, String name) {
         if ((family != "") && (name != "")) {
-            E human = (E) new Human(id++, family, name);
+            E human = (E) new Toy(id++, family, name);
             if (!list.contains(human)) {
                 list.add(human);
             }
@@ -38,8 +38,8 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
     }
 
     public boolean addMother (int idhum, String family, String name) {
-        Human human = getByHuman(idhum);//
-        E mother = (E) new Human(id++, family, name);
+        Toy human = getByHuman(idhum);//
+        E mother = (E) new Toy(id++, family, name);
         if ((human != null) && human.setMother(mother)){
             list.add(mother);
             mother.addChildrenList(human);
@@ -48,8 +48,8 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         return false;
     }
     public boolean addFather (int idhum, String family, String name) {
-        Human human = getByHuman(idhum);//
-        E father = (E) new Human(id++, family, name);
+        Toy human = getByHuman(idhum);//
+        E father = (E) new Toy(id++, family, name);
         if ((human != null) && human.setFather(father)){
             list.add(father);
             father.addChildrenList(human);
@@ -58,8 +58,8 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         return false;
     }
     public boolean addChild (int idhum, String family, String name) {
-        Human human = getByHuman(idhum);//
-        E child = (E) new Human(id++, family, name);
+        Toy human = getByHuman(idhum);//
+        E child = (E) new Toy(id++, family, name);
         if ((human != null) && (addHum(child))){
             human.addChildrenList(child);
             child.setMother(human);
@@ -102,7 +102,7 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
 
     public String getByMather(String family, String name) {
         StringBuilder sb = new StringBuilder();
-        E human = (E) new Human(family, name);
+        E human = (E) new Toy(family, name);
         sb.append("Результаты поиска: \n");
         for (E hum : list) {
             if (hum.equals(human)) {
@@ -114,7 +114,7 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
 
     public String getByHuman (String family, String name){
         StringBuilder sb = new StringBuilder();
-        E human = (E) new Human(family, name);
+        E human = (E) new Toy(family, name);
         sb.append("Результаты поиска: \n");
         if (list.contains(human)) {
             for (E hum : list) {
@@ -129,7 +129,7 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         return sb.toString();
     }
 
-    public Human getByHuman (int id){
+    public Toy getByHuman (int id){
         for (E hum : list) {
             if (hum.getId() == id) {
                 return hum;
@@ -141,7 +141,7 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
 
     public String searchParents(String family, String name){
         StringBuilder sb = new StringBuilder();
-        E human = (E) new Human(family, name);
+        E human = (E) new Toy(family, name);
         sb.append("Результаты поиска: \n");
         //    if (list.contains(human)) {
         for (E hum : list) {
@@ -158,7 +158,7 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
 
     public String searchChild(String family, String name){
         StringBuilder sb = new StringBuilder();
-        E human = (E) new Human(family, name);
+        E human = (E) new Toy(family, name);
         sb.append("Результаты поиска: \n");
         //    if (list.contains(human)) {
         for (E hum : list) {
@@ -199,7 +199,7 @@ public class TreeFamily<E extends Human> implements Iterable<E>, Serializable{//
         return new HumanIterator<E>(list);
     }
     public boolean deleteHuman(int idhum){
-        Human human = getByHuman(idhum);
+        Toy human = getByHuman(idhum);
         if (human!=null){
             list.remove(human);
             for (E hum : list) {

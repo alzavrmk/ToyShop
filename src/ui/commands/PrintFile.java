@@ -5,7 +5,7 @@ import ui.Console;
 public class PrintFile extends Command {
     public PrintFile(Console console) {
         super(console);
-        description = "Прочитать дерево из файла";
+        description = "Вывести список игрушек из файла";
     }
 
     @Override
